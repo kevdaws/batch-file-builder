@@ -2,10 +2,8 @@
 # File will be created in current directory.
 # Kevin Dawson
 
-from urllib.parse import quote_from_bytes
 import requests
 import gateway
-
 
 def getMerchantCredentials():
 
@@ -34,10 +32,10 @@ def filterDuplicates():
 
 def getDateAndTime():
 
-    sDate = input("Please enter the start date: (MM/DD/YYYY) ")
-    sTime = input("Please enter the start time: (## ## AM/PM) ")
-    eDate = input("Please enter the end date: (MM/DD/YYYY) ")
-    eTime = input("Please enter the end time: (## ## AM/PM) ")
+    sDate = input("Please enter the start date (MM/DD/YYYY): ")
+    sTime = input("Please enter the start time (## ## AM/PM): ")
+    eDate = input("Please enter the end date (MM/DD/YYYY): ")
+    eTime = input("Please enter the end time (## ## AM/PM): ")
 
     s1 = sDate.split("/")
     s2 = sTime.split(" ")
@@ -90,7 +88,7 @@ def writeCredit():
     f.write(', ')
     f.write(str(i['orderInfo']['amount']))
     f.write('\n')
-    print("ref number written to file")
+    print("Credit written to file!")
 
 
 def writeVoid():
@@ -100,7 +98,7 @@ def writeVoid():
     f.write(", ")
     f.write(str(i['referenceNumber']))
     f.write('\n')
-    print("ref number written to file")
+    print("Void written to file!")
 
 
 for i in transactionData['data']['orders']:
@@ -120,6 +118,7 @@ for i in transactionData['data']['orders']:
             else:
 
                 writeVoid()
+        
 
     else:
 
@@ -132,5 +131,6 @@ for i in transactionData['data']['orders']:
             else:
 
                 writeVoid()
+
 
 f.close()
